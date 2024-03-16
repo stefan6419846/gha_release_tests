@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        # with:
+        #   repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract version from commit message
         id: extract_version
         run: |
