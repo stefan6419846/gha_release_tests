@@ -27,7 +27,7 @@ jobs:
         id: extract_message
         run: |
           VERSION="${{ steps.extract_version.outputs.version }}"
-          MESSAGE=$(echo "${{ github.event.head_commit.message }}" | sed "s/$VERSION//" )
+          MESSAGE=$(echo "${{ github.event.head_commit.message }}" | sed "0,/REL: $VERSION/s///" )
           echo "message<<EOFINVALID" >> $GITHUB_OUTPUT
           echo "$MESSAGE" >> $GITHUB_OUTPUT
           echo "EOFINVALID" >> $GITHUB_OUTPUT
