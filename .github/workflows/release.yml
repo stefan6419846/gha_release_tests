@@ -27,10 +27,11 @@ jobs:
         id: extract_message
         run: |
           VERSION="${{ steps.extract_version.outputs.version }}"
+          delimiter="$(openssl rand -hex 8)"
           MESSAGE=$(echo "${{ github.event.head_commit.message }}" | sed "0,/REL: $VERSION/s///" )
-          echo "message<<EOFINVALID" >> $GITHUB_OUTPUT
+          echo "message<<${delimiter}" >> $GITHUB_OUTPUT
           echo "$MESSAGE" >> $GITHUB_OUTPUT
-          echo "EOFINVALID" >> $GITHUB_OUTPUT
+          echo "${delimiter}" >> $GITHUB_OUTPUT
       - name: Create Git Tag
         run: |
           VERSION="${{ steps.extract_version.outputs.version }}"
