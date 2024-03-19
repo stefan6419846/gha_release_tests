@@ -26,7 +26,8 @@ jobs:
       - name: Extract tag message from commit message
         id: extract_message
         run: |
-          MESSAGE=$(echo "${{ github.event.head_commit.message }}" | sed "s/${{ steps.extract_version.outputs.version }}//" )
+          VERSION="${{ steps.extract_version.outputs.version }}"
+          MESSAGE=$(echo "${{ github.event.head_commit.message }}" | sed "s/$VERSION//" )
           echo "message=$MESSAGE" >> $GITHUB_OUTPUT
       - name: Create Git Tag
         run: |
