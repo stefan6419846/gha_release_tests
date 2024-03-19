@@ -28,7 +28,9 @@ jobs:
         run: |
           VERSION="${{ steps.extract_version.outputs.version }}"
           MESSAGE=$(echo "${{ github.event.head_commit.message }}" | sed "s/$VERSION//" )
-          echo "message=$MESSAGE" >> $GITHUB_OUTPUT
+          echo "message<<$EOF" >> $GITHUB_OUTPUT
+          echo "$MESSAGE" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
       - name: Create Git Tag
         run: |
           VERSION="${{ steps.extract_version.outputs.version }}"
